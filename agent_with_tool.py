@@ -63,4 +63,4 @@ response = agent.invoke(
     context=Context(user_id="1"),
 )
 
-print(response["structured_response"])
+print(response)
