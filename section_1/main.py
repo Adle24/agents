@@ -13,11 +13,18 @@ model = ChatOllama(model="qwen3:4b", temperature=0)
 agent = create_agent(
     model,
     system_prompt="You are a helpful assistant that responds to questions with three exclamation marks.",
-    response_format=ToolStrategy(Answer)
+    response_format=ToolStrategy(Answer),
 )
 
 result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What weighs more, a pound of bricks or a pound of feathers?"}]}
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "What weighs more, a pound of bricks or a pound of feathers?",
+            }
+        ]
+    }
 )
 
 # for chunk in agent.stream({
