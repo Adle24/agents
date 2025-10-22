@@ -49,7 +49,7 @@ all_splits = text_splitter.split_documents(docs)
 # storing documents
 document_ids = vector_store.add_documents(documents=all_splits)
 
-query = ("Кто возглавляет палаты?")
+query = "Кто возглавляет палаты?"
 
 for event in agent.stream(
     {"messages": [{"role": "user", "content": query}]},
