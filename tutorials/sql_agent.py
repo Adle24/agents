@@ -59,15 +59,15 @@ agent = create_agent(
 
 question = "Which genre on average has the longest tracks?"
 
-result = agent.invoke({
-    "messages": [
-        {
-            "role": "user",
-            "content": question,
-        }
-    ]
-})
+result = agent.invoke(
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": question,
+            }
+        ]
+    }
+)
 
 print(result)
-
-

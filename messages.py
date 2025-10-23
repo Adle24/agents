@@ -1,5 +1,5 @@
 from langchain.chat_models import init_chat_model
-from langchain.messages import HumanMessage, AIMessage, SystemMessage
+from langchain.messages import HumanMessage, SystemMessage
 
 
 model = init_chat_model("ollama:qwen3:4b")
