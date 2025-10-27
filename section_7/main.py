@@ -22,19 +22,11 @@ style, etc.
 
 reflection_agent = create_agent(model=model, system_prompt=reflection_prompt)
 
-@tool(
-    "subagent1_name",
-    description="subagent1_description"
-)
+
+@tool("subagent1_name", description="subagent1_description")
 def call_subagent1(query: str):
-    result = reflection_agent.invoke({
-        "messages": [{"role": "user", "content": query}]
-    })
+    result = reflection_agent.invoke({"messages": [{"role": "user", "content": query}]})
     return result["messages"][-1].content
 
 
-agent = create_agent(
-    model=model,
-    system_prompt=generate_prompt,
-    tools=[call_subagent1]
-)
+agent = create_agent(model=model, system_prompt=generate_prompt, tools=[call_subagent1])
