@@ -1,20 +1,26 @@
 from dataclasses import dataclass
 from langchain.agents import create_agent, AgentState
 from langchain.tools import tool, ToolRuntime
-from langchain.agents.middleware import dynamic_prompt, ModelRequest, before_model, after_model
+from langchain.agents.middleware import (
+    dynamic_prompt,
+    ModelRequest,
+    before_model,
+    after_model,
+)
 from langgraph.runtime import Runtime
-
 
 
 @dataclass
 class Context:
     user_name: str
 
+
 @dynamic_prompt
 def dynamic_system_prompt(request: ModelRequest) -> str:
     user_name = request.runtime.context.user_name
     system_prompt = f"You are a helpful assistant. Address the user as {user_name}."
     return system_prompt
+
 
 @tool
 def fetch_user_email_preferences(runtime: ToolRuntime[Context]) -> str:
@@ -28,10 +34,12 @@ def fetch_user_email_preferences(runtime: ToolRuntime[Context]) -> str:
 
     return preferences
 
+
 @before_model
 def log_before_model(state: AgentState, runtime: Runtime[Context]) -> dict | None:
     print(f"Processing request for user: {runtime.context.user_name}")
     return None
+
 
 # After model hook
 @after_model
@@ -44,12 +52,12 @@ agent = create_agent(
     model="ollama:qwen3:4b",
     tools=[fetch_user_email_preferences],
     middleware=[dynamic_system_prompt, log_before_model, log_after_model],
-    context_schema=Context
+    context_schema=Context,
 )
 
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "What's my name?"}]},
-    context=Context(user_name="Askar Adilet")
+    context=Context(user_name="Askar Adilet"),
 )
 
 print(result)
