@@ -16,6 +16,7 @@ dependencies = [
     "langgraph>=1.0.0",
     "mcp>=1.19.0",
     "ollama>=0.6.0",
+    "pandas>=2.3.3",
     "psycopg>=3.2.11",
     "pypdf>=6.1.2",
 ]
