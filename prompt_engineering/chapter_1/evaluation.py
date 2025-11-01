@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 from ollama import chat
 from ollama import ChatResponse
 
@@ -25,6 +24,7 @@ Product names:"""
 
 test_prompts = [prompt_a, prompt_b]
 
+
 def get_response(prompt: str):
     response: ChatResponse = chat(
         model="qwen3:4b",
@@ -36,7 +36,7 @@ def get_response(prompt: str):
             {
                 "role": "user",
                 "content": prompt,
-            }
+            },
         ],
     )
 
